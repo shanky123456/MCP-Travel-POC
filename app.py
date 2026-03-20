@@ -1,31 +1,34 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-import asyncio
-from agentWithMultipleMCPServers import run_query
+from agentWithMultipleMCPServers import run_query, create_agent
 
 app = FastAPI()
 
-# Request schema
+agent = None  # global agent
+
 class QueryRequest(BaseModel):
     utterance: str
 
 
+@app.on_event("startup")
+async def startup_event():
+    print("Creating agent once at startup...")
+    app.state.agent = await create_agent()
+    print("Agent ready 🚀")
+
 @app.post("/query")
 async def query_agent(req: QueryRequest):
     try:
-        tool_data, llm_response = await run_query(req.utterance)
+        agent = app.state.agent
+        response = await run_query(agent, req.utterance)
 
         return {
             "status": "success",
-            "tool_data": tool_data,
-            "llm_response": llm_response,
-            "source": "agent"
+            "data": response
         }
 
     except Exception as e:
         return {
             "status": "error",
-            "tool_data": None,
-            "llm_response": str(e),
-            "source": "backend"
+            "error": str(e)
         }
