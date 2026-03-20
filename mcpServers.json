@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "airbnb": {
+      "command": "npx",
+      "args": ["-y", "@openbnb/mcp-server-airbnb", "--ignore-robots-txt"]
+    },
+    "ticketmaster": {
+      "command": "npx",
+      "args": ["-y", "@delorenj/mcp-server-ticketmaster"],
+      "env": {
+        "TICKETMASTER_API_KEY": "IWOxtdOE7fuw78dCM2jUZe98ndD7w4Yn"
+      }
+    },
+    "travel-planner": {
+      "command": "npx",
+      "args": ["travel-mcp-server"]
+    }
+    
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "flight-search": {
+      "command": "uv",
+      "args": [
+        "--directory", "C:/Users/sanke/mcp_travelassistant/servers/flight_server/",
+        "run", "python", "flight_server.py"
+      ],
+      "env": {
+        "SERPAPI_KEY": "a515809c9867311f5b4e493e1eb81487bbceda93c29d57b533d8b693b82ebb96"
+      }
+    },
+    "hotel-search": {
+      "command": "uv", 
+      "args": [
+        "--directory", "C:/Users/sanke/mcp_travelassistant/servers/hotel_server/",
+        "run", "python", "hotel_server.py"
+      ],
+      "env": {
+        "SERPAPI_KEY": "a515809c9867311f5b4e493e1eb81487bbceda93c29d57b533d8b693b82ebb96"
+      }
+    }
+  }
+}
