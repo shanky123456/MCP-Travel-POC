@@ -9,7 +9,7 @@
 
 
 # utterance = "Search one way flights from BOM airport in Mumbai to BLR airport in Bangalore on 26th march 2026" 
-# # utterance = "Search hotels in bangalore from 26th march 2026 to 29th march 2026"
+# # utterance = "Search hotels in bangalore from 30th march 2026 to 31th march 2026"
 # utterance = "Send message as good to Daddy on whatsapp"
 # agent =  asyncio.run(create_agent())
 # # asyncio.run(run_query(agent, utterance))  #Utterance will come form tool from bixby --- user_query is actually an utterance which will be coming through Rest API.
@@ -33,3 +33,7 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())  # ✅ only ONCE    
+
+    # Plan a weekend trip from Bengaluru to Mumbai Budget is 40000 for 2 people. Find flights leaving 27th March 2026  and returning 29th March 2026 along with place to stay.
+
+    # Can you show me list of hotels priced priced below Rs 10000

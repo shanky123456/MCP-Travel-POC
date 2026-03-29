@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from agentWithMultipleMCPServers import run_query, create_agent
+import json
+from datetime import datetime
 
 app = FastAPI()
 
@@ -16,19 +18,38 @@ async def startup_event():
     app.state.agent = await create_agent()
     print("Agent ready 🚀")
 
+
 @app.post("/query")
 async def query_agent(req: QueryRequest):
     try:
         agent = app.state.agent
         response = await run_query(agent, req.utterance)
 
-        return {
+        output = {
+            "timestamp": datetime.now().isoformat(),
             "status": "success",
+            "input": req.utterance,
             "data": response
         }
 
+        # Save to JSON file
+        with open("responses.json", "a") as f:
+            json.dump(output, f)
+            f.write("\n")   # newline for multiple records
+
+        return output
+
     except Exception as e:
-        return {
+        error_output = {
+            "timestamp": datetime.now().isoformat(),
             "status": "error",
+            "input": req.utterance,
             "error": str(e)
         }
+
+        # Save error also
+        with open("responses.json", "a") as f:
+            json.dump(error_output, f)
+            f.write("\n")
+
+        return error_output

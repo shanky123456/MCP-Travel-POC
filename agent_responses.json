@@ -1,0 +1,64 @@
+[
+  {
+    "status": "success",
+    "toolName": "search_events",
+    "toolInput": {
+      "query": "concerts",
+      "date_filter": "month",
+      "location": "Bengaluru"
+    },
+    "toolOutput": {
+      "search_id": "concerts_Bengaluru_month_20260329_080240",
+      "total_events": 6,
+      "query": "concerts",
+      "location": "Bengaluru",
+      "filters_applied": {
+        "date_filter": "month",
+        "event_type": null
+      },
+      "sample_events": [
+        {
+          "title": "Udit Narayan & Aditya Narayan",
+          "date": "Sat, Mar 28, 6:00 \u00e2\u0080\u0093 11:59 PM GMT+5:30",
+          "venue": "Barley & Grapes Cafe - Phoenix Market City"
+        },
+        {
+          "title": "Def Leppard",
+          "date": "Sun, Mar 29, 5 \u00e2\u0080\u0093 8 PM GMT+5:30",
+          "venue": "NICE Grounds"
+        },
+        {
+          "title": "Shafi Kollam x Saleem Kodathur Live in Concert",
+          "date": "Sun, Mar 29, 8 PM \u00e2\u0080\u0093 Mon, Mar 30, 1 AM GMT+5:30",
+          "venue": "White Lotus Club Bengaluru"
+        }
+      ],
+      "search_parameters": {
+        "search_id": "concerts_Bengaluru_month_20260329_080240",
+        "query": "concerts",
+        "location": "Bengaluru",
+        "date_filter": "month",
+        "event_type": null,
+        "language": "en",
+        "country": "us",
+        "search_timestamp": "2026-03-29T08:02:40.931594",
+        "total_results": 6
+      }
+    },
+    "llmResponse": "I found 6 concerts happening in Bengaluru this month. Some of them are:\n\n*   **Udit Narayan & Aditya Narayan** on Saturday, March 28, 6:00 \u2013 11:59 PM GMT+5:30 at Barley & Grapes Cafe - Phoenix Market City\n*   **Def Leppard** on Sunday, March 29, 5 \u2013 8 PM GMT+5:30 at NICE Grounds\n*   **Shafi Kollam x Saleem Kodathur Live in Concert** on Sunday, March 29, 8 PM \u2013 Mon, March 30, 1 AM GMT+5:30 at White Lotus Club Bengaluru\n\nWould you like to know more details about these concerts?"
+  },
+  {
+    "status": "success",
+    "toolName": null,
+    "toolInput": null,
+    "toolOutput": null,
+    "llmResponse": "Here is the list of events I found:\n\n*   **Udit Narayan & Aditya Narayan** on Sat, Mar 28, 6:00 \u2013 11:59 PM GMT+5:30 at Barley & Grapes Cafe - Phoenix Market City\n*   **Def Leppard** on Sun, Mar 29, 5 \u2013 8 PM GMT+5:30 at NICE Grounds\n*   **Shafi Kollam x Saleem Kodathur Live in Concert** on Sun, Mar 29, 8 PM \u2013 Mon, Mar 30, 1 AM GMT+5:30 at White Lotus Club Bengaluru"
+  },
+  {
+    "status": "success",
+    "toolName": null,
+    "toolInput": null,
+    "toolOutput": null,
+    "llmResponse": "Here are the details for the Udit Narayan & Aditya Narayan concert:\n\n*   **Title:** Udit Narayan & Aditya Narayan\n*   **Date:** Saturday, March 28, 6:00 \u2013 11:59 PM GMT+5:30\n*   **Venue:** Barley & Grapes Cafe - Phoenix Market City"
+  }
+]

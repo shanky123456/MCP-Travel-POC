@@ -3,6 +3,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage, SystemMessage
 from mcp_use import MCPAgent, MCPClient
 from langchain_google_genai import ChatGoogleGenerativeAI
+# from langchain_community.chat_models import ChatOllama
 import asyncio
 import json
 import os
@@ -20,7 +21,12 @@ GEMINI_API_KEY_4 = os.getenv("GEMINI_API_KEY_4")
 
 
 # llm = ChatOpenAI(model_name="gpt-4o-mini",temperature=0,api_key=OPENAI_API_KEY)                                       ##OpenAI LLM
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash",temperature=0,google_api_key=GEMINI_API_KEY_1)                      ##Gemini LLM
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash",temperature=0,google_api_key=GEMINI_API_KEY_4)                      ##Gemini LLM
+
+# llm = ChatOllama(
+#     model="llama3",
+#     temperature=0
+# )
 async def create_agent():
 
     with open(MCP_CONFIG_FILE) as f:
@@ -39,8 +45,13 @@ async def create_agent():
 
     return  agent
 
+import json
+from datetime import datetime
+import os
+
+OUTPUT_FILE = "agent_responses.json"
+
 async def run_query(agent, utterance: str):
-    # agent = await create_agent()
 
     tool_output = None
     tool_name = None
@@ -51,16 +62,20 @@ async def run_query(agent, utterance: str):
         print("entering here")
         print("step: ", step)
         print("type of step : ", type(step))
+
         if isinstance(step, (list, tuple)) and len(step) == 2:
             action, tool_output = step
             tool_name = action.tool
             tool_input = action.tool_input
+
             start = tool_output.find("{")
             end = tool_output.rfind("}") + 1
             data = tool_output[start:end]
             data = data.encode().decode('unicode_escape')
             data = json.loads(data)
+
             tool_output = data
+
         elif isinstance(step, str):
             llm_response = step
 
@@ -68,14 +83,30 @@ async def run_query(agent, utterance: str):
     print("llm_response : ", llm_response)
 
     response = {
-    "status": "success",
-    "toolName": tool_name,
-    "toolInput": tool_input,
-    "toolOutput": tool_output,
-    "llmResponse" : llm_response
+        "status": "success",
+        "toolName": tool_name,
+        "toolInput": tool_input,
+        "toolOutput": tool_output,
+        "llmResponse": llm_response
     }
 
     print("Final Response : ", response)
+
+    # ✅ Save to JSON file
+    try:
+        if os.path.exists(OUTPUT_FILE):
+            with open(OUTPUT_FILE, "r") as f:
+                data = json.load(f)
+        else:
+            data = []
+
+        data.append(response)
+
+        with open(OUTPUT_FILE, "w") as f:
+            json.dump(data, f, indent=2)
+
+    except Exception as e:
+        print("Error saving JSON:", e)
 
     return response
 
